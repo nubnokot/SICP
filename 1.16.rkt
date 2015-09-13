@@ -11,6 +11,5 @@
         (iter a (* expt expt) (/ new-n 2) (* counter 2))
         (iter (* a b) expt (- new-n 1) (+ 1 counter)))
         (* a expt)))
+  
   (iter 1 b n 1))
-
-(fast-expt 3 5)
