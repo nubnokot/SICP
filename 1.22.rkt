@@ -18,18 +18,21 @@
   (* x x))
 
 (define (timed-prime-test n)
-  (newline)
-  (display n)
   (start-prime-test n (runtime)))
 
 (define (start-prime-test n start-time)
   (when (prime? n)
-      (report-prime (- (runtime) start-time))))
+      (report-prime (- (runtime) start-time) n)))
 
-(define (report-prime elapsed-time)
+(define (report-prime elapsed-time n)
+  (newline)
+  (display n)
   (display " *** ")
   (display elapsed-time))
 
 (define (runtime) (current-inexact-milliseconds))
 
-(timed-prime-test 1073676287)
+(define (search-for-primes a b)
+  (timed-prime-test a)
+  (when (< a b)
+      (search-for-primes (+ a 2) b)))
