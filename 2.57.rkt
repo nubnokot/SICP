@@ -57,14 +57,22 @@
 
 (define (addend s) (cadr s))
 
-(define (augend s) (caddr s))
+(define (augend s)
+  (if (null? (cdddr s))
+      (caddr s)
+      (make-sum (addend (cdr s))
+                (augend (cdr s))))) 
 
 (define (product? x)
   (and (pair? x) (eq? (car x) '*)))
 
 (define (multiplier p) (cadr p))
 
-(define (multiplicand p) (caddr p))
+(define (multiplicand p)
+  (if (null? (cdddr p))
+      (caddr p)
+      (make-product (multiplier (cdr p))
+                    (multiplicand (cdr p)))))
 
 (define (exponentation? x)
   (and (pair? x) (eq? (car x) '**)))
@@ -72,6 +80,4 @@
 (define (base e) (cadr e))
 
 (define (exponent e) (caddr e))
-
-(deriv '(** (+ x y) a) 'x)
 
